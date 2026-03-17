@@ -6,7 +6,7 @@ If you prefer explicit per-route extraction, use ``extract_byok()`` instead.
 from __future__ import annotations
 
 from contextvars import ContextVar
-from typing import Optional, Set
+from typing import Optional
 
 from starlette.exceptions import HTTPException
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
@@ -19,7 +19,7 @@ from ._extract import extract_byok
 _ctx: ContextVar[Optional[BYOKCredentials]] = ContextVar("byok_ctx", default=None)
 
 
-DEFAULT_SKIP_PATHS: Set[str] = {"/", "/health", "/docs", "/openapi.json", "/redoc"}
+DEFAULT_SKIP_PATHS: set[str] = {"/", "/health", "/docs", "/openapi.json", "/redoc"}
 
 
 class BYOKMiddleware(BaseHTTPMiddleware):

@@ -1,4 +1,4 @@
-import type { BYOKConfig, BYOKHeaders } from "./types";
+import type { BYOKConfig, BYOKHeaders, Provider } from "./types";
 import { KeyManager } from "./KeyManager";
 import { SettingsUI } from "./SettingsUI";
 
@@ -58,7 +58,7 @@ export const PROVIDERS = {
     defaultModel: "gemini/gemini-2.5-flash",
     validateKey: (k: string) => k.startsWith("AIza") && k.length > 20,
   },
-} as const;
+}satisfies Record<string, Provider>;;
 
 // ── Main Entry Point ─────────────────────────────────────────────────────────
 

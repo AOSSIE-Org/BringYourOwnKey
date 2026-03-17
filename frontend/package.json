@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "description": "BYOK frontend widget — settings modal + key storage + header helper",
   "type": "module",
-  "main": "dist/byok.js",
-  "types": "dist/byok.d.ts",
-  "files": ["dist"],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"

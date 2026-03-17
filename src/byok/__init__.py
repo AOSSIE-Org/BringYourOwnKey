@@ -29,4 +29,4 @@ from ._types import BYOKCredentials
 from ._extract import extract_byok
 from ._middleware import BYOKMiddleware, get_byok
 
-__all__ = ["BYOKCredentials", "extract_byok", "BYOKMiddleware", "get_byok"]
+__all__ = ["BYOKCredentials", "BYOKMiddleware", "extract_byok", "get_byok"]
