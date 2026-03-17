@@ -1,0 +1,16 @@
+{
+  "name": "@byok-lib/frontend",
+  "version": "0.1.0",
+  "description": "BYOK frontend widget — settings modal + key storage + header helper",
+  "type": "module",
+  "main": "dist/byok.js",
+  "types": "dist/byok.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}
