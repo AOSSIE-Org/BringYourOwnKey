@@ -4,7 +4,60 @@ import { KeyManager } from "./KeyManager";
 // ── Styles ───────────────────────────────────────────────────────────────────
 
 const buildStyles = (accent: string) => `
-  :host { all: initial; }
+  :host {
+    all: initial;
+    --byok-bg: #fff;
+    --byok-text: #0f172a;
+    --byok-text-muted: #64748b;
+    --byok-label: #374151;
+    --byok-border: #e2e8f0;
+    --byok-input-bg: #f8fafc;
+    --byok-input-focus-bg: #fff;
+    --byok-instructions-bg: #f8fafc;
+    --byok-first-run-bg: linear-gradient(135deg, #eff6ff, #f0fdf4);
+    --byok-first-run-border: #bfdbfe;
+    --byok-first-run-text: #1e40af;
+    --byok-btn-cancel-bg: #f1f5f9;
+    --byok-btn-cancel-hover: #e2e8f0;
+    --byok-btn-cancel-text: #475569;
+  }
+
+  :host([data-theme="dark"]) {
+    --byok-bg: #1e293b;
+    --byok-text: #f8fafc;
+    --byok-text-muted: #94a3b8;
+    --byok-label: #cbd5e1;
+    --byok-border: #334155;
+    --byok-input-bg: #0f172a;
+    --byok-input-focus-bg: #1e293b;
+    --byok-instructions-bg: #0f172a;
+    --byok-first-run-bg: linear-gradient(135deg, rgba(30, 58, 138, 0.35), rgba(20, 83, 45, 0.35));
+    --byok-first-run-border: #1e3a8a;
+    --byok-first-run-text: #93c5fd;
+    --byok-btn-cancel-bg: #334155;
+    --byok-btn-cancel-hover: #475569;
+    --byok-btn-cancel-text: #e2e8f0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :host(:not([data-theme="light"])) {
+      --byok-bg: #1e293b;
+      --byok-text: #f8fafc;
+      --byok-text-muted: #94a3b8;
+      --byok-label: #cbd5e1;
+      --byok-border: #334155;
+      --byok-input-bg: #0f172a;
+      --byok-input-focus-bg: #1e293b;
+      --byok-instructions-bg: #0f172a;
+      --byok-first-run-bg: linear-gradient(135deg, rgba(30, 58, 138, 0.35), rgba(20, 83, 45, 0.35));
+      --byok-first-run-border: #1e3a8a;
+      --byok-first-run-text: #93c5fd;
+      --byok-btn-cancel-bg: #334155;
+      --byok-btn-cancel-hover: #475569;
+      --byok-btn-cancel-text: #e2e8f0;
+    }
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   .overlay {
@@ -16,9 +69,9 @@ const buildStyles = (accent: string) => `
   }
 
   .modal {
-    background: #fff; border-radius: 14px; width: 460px;
+    background: var(--byok-bg); border-radius: 14px; width: 460px;
     max-width: 95vw; max-height: 90vh; overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     animation: pop .2s cubic-bezier(.34,1.56,.64,1);
   }
   @keyframes pop {
@@ -27,34 +80,35 @@ const buildStyles = (accent: string) => `
   }
 
   .header { padding: 22px 24px 0; }
-  .header h2 { font-size: 1.1rem; font-weight: 700; color: #0f172a; }
-  .header p  { margin-top: 4px; font-size: .8rem; color: #64748b; }
+  .header h2 { font-size: 1.1rem; font-weight: 700; color: var(--byok-text); }
+  .header p  { margin-top: 4px; font-size: .8rem; color: var(--byok-text-muted); }
 
   .body { padding: 18px 24px 24px; }
 
   .first-run {
-    background: linear-gradient(135deg, #eff6ff, #f0fdf4);
-    border: 1px solid #bfdbfe; border-radius: 10px;
-    padding: 12px 14px; font-size: .8rem; color: #1e40af;
+    background: var(--byok-first-run-bg);
+    border: 1px solid var(--byok-first-run-border); border-radius: 10px;
+    padding: 12px 14px; font-size: .8rem; color: var(--byok-first-run-text);
     margin-bottom: 18px; line-height: 1.5;
   }
 
   .field { margin-bottom: 16px; }
-  .field label { display: block; font-size: .72rem; font-weight: 600; color: #374151; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+  .field label { display: block; font-size: .72rem; font-weight: 600; color: var(--byok-label); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
 
   select, input {
-    width: 100%; padding: 9px 12px; border: 1.5px solid #e2e8f0;
-    border-radius: 9px; font-size: .85rem; color: #0f172a;
-    background: #f8fafc; outline: none;
-    transition: border-color .15s, box-shadow .15s;
+    width: 100%; padding: 9px 12px; border: 1.5px solid var(--byok-border);
+    border-radius: 9px; font-size: .85rem; color: var(--byok-text);
+    background: var(--byok-input-bg); outline: none;
+    transition: border-color .15s, box-shadow .15s, background .15s;
   }
-  select:focus, input:focus { border-color: ${accent}; box-shadow: 0 0 0 3px ${accent}22; background: #fff; }
+  select option { background: var(--byok-bg); color: var(--byok-text); }
+  select:focus, input:focus { border-color: ${accent}; box-shadow: 0 0 0 3px ${accent}22; background: var(--byok-input-focus-bg); }
   input { font-family: "SF Mono", "Fira Code", monospace; }
 
   .instructions {
     margin-top: 10px; padding: 10px 14px;
-    background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
-    font-size: .78rem; color: #475569; line-height: 1.5;
+    background: var(--byok-instructions-bg); border: 1px solid var(--byok-border); border-radius: 8px;
+    font-size: .78rem; color: var(--byok-text-muted); line-height: 1.5;
   }
   .instructions a { color: ${accent}; text-decoration: none; font-weight: 600; }
   .instructions a:hover { text-decoration: underline; }
@@ -66,8 +120,8 @@ const buildStyles = (accent: string) => `
     flex: 1; padding: 10px; border-radius: 9px; font-size: .85rem;
     font-weight: 600; cursor: pointer; transition: all .15s; border: none;
   }
-  .btn-cancel { background: #f1f5f9; color: #475569; }
-  .btn-cancel:hover { background: #e2e8f0; }
+  .btn-cancel { background: var(--byok-btn-cancel-bg); color: var(--byok-btn-cancel-text); }
+  .btn-cancel:hover { background: var(--byok-btn-cancel-hover); }
   .btn-save { background: ${accent}; color: #fff; }
   .btn-save:hover { filter: brightness(1.1); }
 
@@ -106,6 +160,12 @@ export class SettingsUI extends HTMLElement {
     const providers = config.providers;
     const savedProvider = keyManager.getActiveProvider() ?? providers[0]?.id ?? "";
     const savedModel = keyManager.getActiveModel() ?? "";
+
+    if (config.theme && config.theme !== "auto") {
+      this.setAttribute("data-theme", config.theme);
+    } else {
+      this.removeAttribute("data-theme");
+    }
 
     this.root.innerHTML = `
       <style>${buildStyles(accent)}</style>

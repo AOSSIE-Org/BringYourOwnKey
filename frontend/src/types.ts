@@ -20,6 +20,7 @@ export interface BYOKConfig {
   projectId: string;
   providers: Provider[];
   accentColor?: string;
+  theme?: "light" | "dark" | "auto";
 }
 
 export interface StoredSettings {

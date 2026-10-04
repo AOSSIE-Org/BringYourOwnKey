@@ -40,9 +40,9 @@ class BYOKMiddleware(BaseHTTPMiddleware):
         skip_paths: Extra paths (besides the defaults) to skip auth for.
     """
 
-    def __init__(self, app, skip_paths: Optional[Set[str]] = None) -> None:  # type: ignore[override]
+    def __init__(self, app, skip_paths: Optional[set[str] | list[str]] = None) -> None:  # type: ignore[override]
         super().__init__(app)
-        self.skip_paths = DEFAULT_SKIP_PATHS | (skip_paths or set())
+        self.skip_paths = DEFAULT_SKIP_PATHS | set(skip_paths or ())
 
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         if request.method == "OPTIONS" or request.url.path in self.skip_paths:
